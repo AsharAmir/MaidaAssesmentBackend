@@ -1,4 +1,4 @@
-from fastapi import HTTPException, status, Depends, Security
+from fastapi import HTTPException, Depends, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from .database import tokens_collection
 import secrets

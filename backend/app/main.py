@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from .auth import router as auth_router
 from .moderation import router as moderation_router
 from fastapi.security import HTTPBearer

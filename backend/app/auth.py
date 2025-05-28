@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, status, Request
+from fastapi import APIRouter, HTTPException, Depends
 from .database import tokens_collection
 from .schemas import TokenCreateRequest, TokenResponse
 from .utils import get_current_admin_token, create_token_string
@@ -10,13 +10,17 @@ router = APIRouter()
 @router.post("/tokens", response_model=TokenResponse)
 async def create_token(
     data: TokenCreateRequest,
-    admin=Depends(get_current_admin_token),  # <-- comment this out
+    admin=Depends(get_current_admin_token),
 ):
     """
     Create a token, only admin can create a token
     """
     token = create_token_string()
-    doc = {"token": token, "isAdmin": data.isAdmin, "createdAt": datetime.utcnow()}
+    doc = {
+        "token": token,
+        "isAdmin": data.isAdmin,
+        "createdAt": datetime.utcnow(),
+    }
     await tokens_collection.insert_one(doc)
     return TokenResponse(token=token, isAdmin=data.isAdmin)
 

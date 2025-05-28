@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, UploadFile, Depends, HTTPException
+from fastapi import APIRouter, File, UploadFile, Depends
 from .database import usages_collection
 from .utils import get_current_token
 from .schemas import ModerateResponse
